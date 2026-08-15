@@ -4,19 +4,27 @@ A production-minded, beginner-readable Streamlit application that uses LangGraph
 
 ## Demo
 
-The screenshots below were captured from the running application using a synthetic customer dataset.
+The screenshots below were captured from the running application using a sample Titanic passenger dataset.
 
-### CSV upload and dataset preview
+### CSV upload and dataset profile
 
-![CSV upload, dataset metrics, and tabular preview](docs/images/dataset-preview.png)
+![CSV upload interface and dataset preview](docs/images/csv-upload-preview.png)
 
-### Deterministic data-quality analysis
+![Dataset dimensions, quality metrics, and tabular profile](docs/images/dataset-profile.png)
 
-![Missing-value analysis table and chart](docs/images/eda-results.png)
+### Agentic workflow
 
-### Grounded EDA report
+![Completed autonomous EDA workflow and analyses performed](docs/images/agent-workflow-complete.png)
 
-![AI-generated EDA report based on verified tool results](docs/images/ai-report.png)
+### Deterministic analysis results
+
+![Pearson correlation heatmap generated from deterministic statistics](docs/images/correlation-heatmap.png)
+
+![Verified findings covering missing values, skewness, and potential outliers](docs/images/verified-findings.png)
+
+### Ask Your Dataset
+
+![Grounded answer to a modeling question about the uploaded dataset](docs/images/ask-your-dataset.png)
 
 ## Architecture
 
