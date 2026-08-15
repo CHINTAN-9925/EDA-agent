@@ -2,6 +2,22 @@
 
 A production-minded, beginner-readable Streamlit application that uses LangGraph and Groq to autonomously plan exploratory data analysis. Pandas and NumPy calculate every statistic; the language model plans, chooses allowlisted tools, evaluates compact results, and writes a grounded report. OpenRouter remains available as an optional provider.
 
+## Demo
+
+The screenshots below were captured from the running application using a synthetic customer dataset.
+
+### CSV upload and dataset preview
+
+![CSV upload, dataset metrics, and tabular preview](docs/images/dataset-preview.png)
+
+### Deterministic data-quality analysis
+
+![Missing-value analysis table and chart](docs/images/eda-results.png)
+
+### Grounded EDA report
+
+![AI-generated EDA report based on verified tool results](docs/images/ai-report.png)
+
 ## Architecture
 
 ```text
