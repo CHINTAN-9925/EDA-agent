@@ -78,13 +78,33 @@ def _show_result_tables(state: dict[str, Any]) -> None:
     with relationships_tab:
         result = _result_for(state, "correlation_analysis")
         if result:
-            st.dataframe(pd.DataFrame(result["display_result"]["highly_correlated_pairs"]), use_container_width=True, hide_index=True)
+            method = result["display_result"].get("method", "pearson").title()
+            pairs = result["display_result"].get("highly_correlated_pairs", [])
+            st.subheader(f"High-correlation pairs ({method}, |r| ≥ 0.70)")
+            if pairs:
+                st.dataframe(pd.DataFrame(pairs), use_container_width=True, hide_index=True)
+            else:
+                st.info(
+                    "No pair of different numerical columns reached the |r| ≥ 0.70 threshold. "
+                    "The heatmap below still shows all measured correlations; diagonal 1.00 values are each column correlated with itself."
+                )
+        else:
+            st.info("Correlation analysis was not selected in this agent run, so no relationship results are available.")
         _render_charts(charts, "Relationships")
     with outliers_tab:
         result = _result_for(state, "outlier_analysis")
         if result:
             st.caption("IQR detections are candidates for review, not automatic data errors.")
             st.dataframe(pd.DataFrame(result["display_result"]["columns"]).T, use_container_width=True)
+        else:
+            attempted = next((item for item in state.get("tool_results", []) if item.get("tool_name") == "outlier_analysis"), None)
+            if attempted and attempted.get("status") == "error":
+                st.warning(f"Outlier analysis could not complete: {attempted.get('error', 'Unknown tool error.')}")
+            else:
+                st.info(
+                    "Outlier analysis was not selected in this agent run, so there are no IQR results to display. "
+                    "Check Agent Execution Trace to see the analyses selected; rerun with a higher iteration limit if needed."
+                )
         _render_charts(charts, "Outliers")
     with insights_tab:
         st.markdown(state.get("final_report") or "No report was generated.")
